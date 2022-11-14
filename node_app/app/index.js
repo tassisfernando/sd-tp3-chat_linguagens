@@ -15,7 +15,7 @@ net.createServer(sock => {
     sock.on('data', data => {
         // dados foram recebidos no socket
         // Escreve a mensagem recebida de volta para o socket (echo)
-        console.log(`> Recebido: ${data}`);
+        console.log(`> ${data}`);
       
         const message = prompt('> Envie a sua mensagem: ');
         
