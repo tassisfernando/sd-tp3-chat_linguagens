@@ -10,20 +10,25 @@ public class Connection {
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
+    private String name;
 
-    public Connection(String ip, int port) throws IOException {
+    public Connection(String ip, int port, String name) throws IOException {
+        this.name = name;
         System.out.println("[Conectando socket...]");
         this.socket = new Socket(ip, port);
 
         in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
         out = new PrintWriter(this.socket.getOutputStream(), true);
+        System.out.println("[Conectado com sucesso]");
     }
 
-    // escreve e recebe mensagem full no socket (String)
+    /**
+     * Método que escreve e recebe mensagem no socket (String)
+     */
     public String sendMessage(String message) {
         try {
-            // escreve str no socket e lêr
-            out.println(message);
+            // escreve no socket e lê a mensagem de resposta
+            out.println(name + ": " + message);
             return in.readLine();
         } catch (IOException e) {
             System.out.println("-> Houve um erro de conexão com o servidor");

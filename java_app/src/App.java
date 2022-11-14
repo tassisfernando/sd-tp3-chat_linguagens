@@ -3,16 +3,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class App {
-    // objeto socket
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Informe seu nome: ");
+            String name = bufferedReader.readLine();
+
             // instancia classe
-            Connection client = new Connection(Utils.IP_SERVER, Utils.PORT_SERVER);
+            Connection client = new Connection(Utils.IP_SERVER, Utils.PORT_SERVER, name);
 
             // escreve e recebe mensagem
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("> Envie a sua mensagem: ");
+            System.out.print("> Envie a sua mensagem: ");
             String message = bufferedReader.readLine();
 
             while (!message.equalsIgnoreCase(Utils.SAIR)) {
@@ -23,7 +25,7 @@ public class App {
                 }
                 System.out.println("> Recebido: " + response);
 
-                System.out.println("> Envie a sua mensagem: ");
+                System.out.print("> Envie a sua mensagem: ");
                 message = bufferedReader.readLine();
             }
             System.out.println("-> Saindo do chat");
